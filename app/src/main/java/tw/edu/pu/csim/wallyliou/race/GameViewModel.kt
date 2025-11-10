@@ -1,7 +1,9 @@
 package tw.edu.pu.csim.wallyliou.race
 
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableLongStateOf
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -17,6 +19,7 @@ class GameViewModel: ViewModel() {
     var gameRunning by mutableStateOf(false)
     var circleX by mutableStateOf(0f)
     var circleY by mutableStateOf(0f)
+    var counter by mutableStateOf(0f)
 
 
     fun StartGame() {
@@ -29,6 +32,7 @@ class GameViewModel: ViewModel() {
                 circleX += 10
                 if (circleX >= screenWidthPx - 100){
                     circleX = 100f
+                    counter++
                 }
             }
         }

@@ -21,6 +21,8 @@ class GameViewModel: ViewModel() {
     var circleY by mutableStateOf(0f)
     var counter by mutableStateOf(0f)
 
+    val horse = Horse()
+
 
     fun StartGame() {
 //回到初使位置
@@ -34,6 +36,11 @@ class GameViewModel: ViewModel() {
                     circleX = 100f
                     counter++
                 }
+                horse.Run()
+                if(horse.HorseX>=screenWidthPx-300){
+                    horse.HorseX=0
+                }
+
             }
         }
     }

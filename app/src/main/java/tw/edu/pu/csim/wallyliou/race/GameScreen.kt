@@ -4,11 +4,18 @@ import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.background
 import androidx.compose.foundation.gestures.detectDragGestures
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.material3.Button
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Offset
@@ -32,16 +39,18 @@ fun GameScreen(message: String,gameViewModel: GameViewModel) {
         ImageBitmap.imageResource(R.drawable.horse2),
         ImageBitmap.imageResource(R.drawable.horse3)
     )
+    val score2=gameViewModel.score
 
 
     Box(modifier = Modifier
         .fillMaxSize()
         .background(Color.Yellow)
     ){
+
         Text(
-            text="分數:${gameViewModel.counter}",
+            text="第${score2}馬獲勝",
             modifier = Modifier
-                .align(Alignment.TopCenter)
+                .align(Alignment.TopEnd)
                 .padding(top = 16.dp)
         )
         Canvas (modifier = Modifier.fillMaxSize()
@@ -81,6 +90,24 @@ fun GameScreen(message: String,gameViewModel: GameViewModel) {
 
             Text(text = "遊戲開始")
         }
+
+
+        var user by remember { mutableStateOf("") }
+        TextField(
+            value = user,
+            onValueChange = { user = it },
+            placeholder = { Text("預測獲勝的馬:") },
+            modifier = Modifier
+                .align(Alignment.TopCenter)
+                .padding(top = 16.dp)
+        )
+        Text("您預測的馬:$user",
+            modifier = Modifier
+                .align(Alignment.TopCenter)
+                .padding(top = 16.dp))
+        Spacer(modifier = Modifier.size(10.dp))
+
+
     }
 
 }
